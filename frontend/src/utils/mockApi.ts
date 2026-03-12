@@ -3,13 +3,13 @@ import type { FileInfo } from '../hooks/useFileUpload';
 const MOCK_FILES: FileInfo[] = [
   {
     id: 'file-1',
-    fileName: 'analysis_plan.py',
+    filename: 'analysis_plan.py',
     sizeBytes: 1234,
     uploadedAt: '2026-02-27T10:00:00Z',
   },
   {
     id: 'file-2',
-    fileName: 'data_cleaning.py',
+    filename: 'data_cleaning.py',
     sizeBytes: 2048,
     uploadedAt: '2026-02-26T15:30:00Z',
   },
@@ -85,7 +85,7 @@ const routes: RouteHandler[] = [
     const file = formData?.get('file') as File | null;
     const newFile: FileInfo = {
       id: `file-${nextId++}`,
-      fileName: file?.name ?? 'uploaded.py',
+      filename: file?.name ?? 'uploaded.py',
       sizeBytes: file?.size ?? 0,
       uploadedAt: new Date().toISOString(),
     };

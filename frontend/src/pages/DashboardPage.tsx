@@ -37,6 +37,13 @@ export function DashboardPage() {
 
   async function handleDelete(id: string) {
     try {
+      // Built-in example files are not stored in the backend;
+      // removing them locally is enough so the UI responds.
+      if (id.startsWith('example-')) {
+        setFiles((prev) => prev.filter((f) => f.id !== id));
+        return;
+      }
+
       await api.del(`/api/files/${id}`);
       setFiles((prev) => prev.filter((f) => f.id !== id));
     } catch {
@@ -87,7 +94,7 @@ export function DashboardPage() {
                 onClick={() => navigate(`/editor/${f.id}`)}
                 className="flex-1 text-left"
               >
-                <span className="text-sm font-medium text-gray-200">{f.fileName}</span>
+                <span className="text-sm font-medium text-gray-200">{f.filename}</span>
                 <span className="ml-3 text-xs text-gray-500">{formatSize(f.sizeBytes)}</span>
               </button>
               <button

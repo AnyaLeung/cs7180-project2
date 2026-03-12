@@ -5,7 +5,7 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 export interface FileInfo {
   id: string;
-  fileName: string;
+  filename: string;
   sizeBytes: number;
   uploadedAt: string;
 }
