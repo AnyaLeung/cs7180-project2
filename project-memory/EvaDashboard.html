@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InstructScan — Evaluation Dashboard</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#f3f4f6;color:#1f2937;line-height:1.5}
+  .container{max-width:960px;margin:0 auto;padding:24px 16px}
+  .header{text-align:center;padding:24px 0 16px}
+  .header h1{font-size:24px;font-weight:700;margin-bottom:4px}
+  .header .ts{font-size:13px;color:#6b7280}
+  .badge{display:inline-block;padding:4px 14px;border-radius:6px;font-size:14px;font-weight:700;margin-top:8px}
+  .card{background:#fff;border-radius:10px;padding:20px 24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .card h2{font-size:17px;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e5e7eb}
+  table{font-size:14px}
+  th{font-weight:600;color:#374151}
+  tr:nth-child(even){background:#f9fafb}
+  @media print{body{background:#fff}.card{box-shadow:none;border:1px solid #e5e7eb}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>InstructScan Evaluation Dashboard</h1>
+    <div class="ts">2026-03-12T05:35:04Z</div>
+    <div class="badge" style="background:#dcfce7;color:#166534">ALL CHECKS PASSED</div>
+  </div>
+  
+    <div class="card">
+      <h2>Test Suite</h2>
+      <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px;align-items:center">
+        <span style="font-weight:600">Backend</span>
+        <div style="display:flex;align-items:center;gap:8px">
+    <div style="flex:1;background:#e5e7eb;border-radius:4px;height:18px;overflow:hidden">
+      <div style="width:100%;background:#22c55e;height:100%;border-radius:4px;transition:width 0.3s"></div>
+    </div>
+    <span style="font-size:13px;font-weight:600;min-width:70px;text-align:right">96/96</span>
+  </div>
+        <span style="font-weight:600">Frontend</span>
+        <div style="display:flex;align-items:center;gap:8px">
+    <div style="flex:1;background:#e5e7eb;border-radius:4px;height:18px;overflow:hidden">
+      <div style="width:100%;background:#22c55e;height:100%;border-radius:4px;transition:width 0.3s"></div>
+    </div>
+    <span style="font-size:13px;font-weight:600;min-width:70px;text-align:right">136/136</span>
+  </div>
+        <span style="font-weight:700;color:#374151">Total</span>
+        <div style="display:flex;align-items:center;gap:8px">
+    <div style="flex:1;background:#e5e7eb;border-radius:4px;height:18px;overflow:hidden">
+      <div style="width:100%;background:#22c55e;height:100%;border-radius:4px;transition:width 0.3s"></div>
+    </div>
+    <span style="font-size:13px;font-weight:600;min-width:70px;text-align:right">232/232</span>
+  </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Code Coverage</h2>
+      <h3 style="margin:8px 0 4px;color:#6b7280;font-size:14px">Backend</h3>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="19.452741711027983"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">91.4%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Statements</div>
+  </div>
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="34.13277586272238"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">84.91%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Branches</div>
+  </div>
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="7.079893204129945"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">96.87%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Functions</div>
+  </div>
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="19.452741711027983"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">91.4%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Lines</div>
+  </div>
+      </div>
+      <h3 style="margin:16px 0 4px;color:#6b7280;font-size:14px">Frontend</h3>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="18.4801046254766"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">91.83%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Statements</div>
+  </div>
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="40.12693464577171"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">82.26%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Branches</div>
+  </div>
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="24.904033283537018"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">88.99%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Functions</div>
+  </div>
+        <div style="text-align:center;width:100px">
+    <svg width="84" height="84" viewBox="0 0 84 84">
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+      <circle cx="42" cy="42" r="36" fill="none" stroke="#22c55e" stroke-width="8"
+        stroke-dasharray="226.1946710584651" stroke-dashoffset="15.96934377672764"
+        stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      <text x="42" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">92.94%</text>
+    </svg>
+    <div style="font-size:12px;color:#6b7280;margin-top:2px">Lines</div>
+  </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Code Quality &amp; Security</h2>
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr style="border-bottom:2px solid #e5e7eb"><th style="text-align:left;padding:6px 12px">Check</th><th style="text-align:center;padding:6px 12px;width:100px">Status</th></tr></thead>
+        <tbody><tr><td style="padding:6px 12px">Backend tests</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Frontend tests</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Backend lint</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Frontend lint</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Backend TypeScript</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Frontend TypeScript</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Backend npm audit</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Frontend npm audit</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Secret detection</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Input validation</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr><tr><td style="padding:6px 12px">Auth security</td><td style="padding:6px 12px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:13px;font-weight:600;background:#dcfce7;color:#166534">&#10003; PASS</span></td></tr></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>LLM Instruction Detection Accuracy</h2>
+      <div style="font-size:13px;color:#6b7280;margin-bottom:12px">
+        Model: <strong>claude-sonnet-4-6</strong> &nbsp;|&nbsp;
+        Dataset: <strong>40</strong> comments &nbsp;|&nbsp;
+        Threshold: <strong>0.6</strong> &nbsp;|&nbsp;
+        Avg Response: <strong>1331ms</strong>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px">
+        <div style="text-align:center;padding:12px 16px;background:#f9fafb;border-radius:8px;min-width:100px">
+        <div style="font-size:28px;font-weight:700;color:#22c55e">100.0%</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:2px">Accuracy</div>
+      </div>
+        <div style="text-align:center;padding:12px 16px;background:#f9fafb;border-radius:8px;min-width:100px">
+        <div style="font-size:28px;font-weight:700;color:#22c55e">100.0%</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:2px">Precision</div>
+      </div>
+        <div style="text-align:center;padding:12px 16px;background:#f9fafb;border-radius:8px;min-width:100px">
+        <div style="font-size:28px;font-weight:700;color:#22c55e">100.0%</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:2px">Recall</div>
+      </div>
+        <div style="text-align:center;padding:12px 16px;background:#f9fafb;border-radius:8px;min-width:100px">
+        <div style="font-size:28px;font-weight:700;color:#22c55e">100.0%</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:2px">F1 Score</div>
+      </div>
+      </div>
+
+      <h3 style="font-size:14px;color:#374151;margin:16px 0 8px">Confusion Matrix</h3>
+      <table style="margin:0 auto;border-collapse:collapse;text-align:center">
+        <thead>
+          <tr>
+            <th style="padding:8px 16px"></th>
+            <th style="padding:8px 16px;font-size:12px;color:#6b7280">Predicted: Yes</th>
+            <th style="padding:8px 16px;font-size:12px;color:#6b7280">Predicted: No</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:8px 16px;font-weight:600;font-size:12px;color:#6b7280">Actual: Yes</td>
+            <td style="padding:12px 24px;background:#dcfce7;font-weight:700;font-size:20px;border-radius:4px">20</td>
+            <td style="padding:12px 24px;background:#fee2e2;font-weight:700;font-size:20px;border-radius:4px">0</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 16px;font-weight:600;font-size:12px;color:#6b7280">Actual: No</td>
+            <td style="padding:12px 24px;background:#fee2e2;font-weight:700;font-size:20px;border-radius:4px">0</td>
+            <td style="padding:12px 24px;background:#dcfce7;font-weight:700;font-size:20px;border-radius:4px">20</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:14px;color:#374151;margin:20px 0 8px">Avg Confidence by Outcome</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
+        <div style="text-align:center;padding:8px 14px;background:#dcfce7;border-radius:6px">
+          <div style="font-size:16px;font-weight:700">99.0%</div>
+          <div style="font-size:11px;color:#166534">True Positive</div>
+        </div>
+        <div style="text-align:center;padding:8px 14px;background:#fee2e2;border-radius:6px">
+          <div style="font-size:16px;font-weight:700">0.0%</div>
+          <div style="font-size:11px;color:#991b1b">False Positive</div>
+        </div>
+        <div style="text-align:center;padding:8px 14px;background:#dcfce7;border-radius:6px">
+          <div style="font-size:16px;font-weight:700">97.5%</div>
+          <div style="font-size:11px;color:#166534">True Negative</div>
+        </div>
+        <div style="text-align:center;padding:8px 14px;background:#fee2e2;border-radius:6px">
+          <div style="font-size:16px;font-weight:700">0.0%</div>
+          <div style="font-size:11px;color:#991b1b">False Negative</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:14px;color:#374151;margin:20px 0 8px">Per-Comment Results</h3>
+      <div style="overflow-x:auto;max-height:500px;overflow-y:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead style="position:sticky;top:0;background:#fff">
+            <tr style="border-bottom:2px solid #e5e7eb">
+              <th style="padding:6px 8px;text-align:left">Comment</th>
+              <th style="padding:6px 8px;text-align:center">Category</th>
+              <th style="padding:6px 8px;text-align:center">Expected</th>
+              <th style="padding:6px 8px;text-align:center">Predicted</th>
+              <th style="padding:6px 8px;text-align:center">Confidence</th>
+              <th style="padding:6px 8px;text-align:center">Correct</th>
+              <th style="padding:6px 8px;text-align:right">Time</th>
+            </tr>
+          </thead>
+          <tbody><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Step 1: Load the dataset from CSV</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-loading</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1141ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Clean missing values using forward fill</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-cleaning</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1274ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Filter rows where age &gt; 18</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-filtering</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1223ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Plot the distribution of income</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">visualization</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1961ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Train a linear regression model</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">modeling</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1976ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Merge the two dataframes on customer_id</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-merging</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">995ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Split data into training and testing sets (80/20)</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-splitting</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1228ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Calculate the mean and standard deviation of each column</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">statistics</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1990ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Create a bar chart of sales by region</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">visualization</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1509ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Export the cleaned results to an Excel file</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-export</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1302ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Normalize the feature columns using min-max scaling</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">feature-engineering</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">813ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Remove duplicate rows based on the ID column</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-cleaning</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1156ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Compute the correlation matrix and find highly correlated features</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">statistics</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1127ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Generate summary statistics for all numeric columns</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">statistics</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1024ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Apply one-hot encoding to the categorical columns</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">feature-engineering</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">2832ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Read data from the REST API endpoint and store as DataFrame</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-loading</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1105ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Build a random forest classifier with 100 trees</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">modeling</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1323ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Visualize the clusters using PCA with 2 components</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">visualization</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1120ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Group by category and aggregate total revenue</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">data-aggregation</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1134ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Save the trained model to disk using joblib</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">model-persistence</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">Yes</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1100ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Author: John Doe</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">metadata</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1059ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># This is a helper function for formatting output</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">explanation</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">97%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1108ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Configuration section</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">section-header</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">97%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1134ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Version 2.0</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">metadata</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">929ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># TODO: refactor later</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">meta-comment</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">95%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1196ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Copyright 2024 All rights reserved</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">legal</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">837ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Last modified: 2024-01-15</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">metadata</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">2286ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># This module handles data formatting utilities</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">explanation</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">95%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">2108ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Note: requires Python 3.8+</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">requirement</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">98%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">2159ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># See documentation at https://docs.example.com</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">reference</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">98%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1247ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Type hints added for clarity</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">explanation</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">95%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1032ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Global constants defined below</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">section-header</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">97%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1249ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Unused for now — may revisit in v3</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">meta-comment</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">97%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1245ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Deprecated: use new_function() instead</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">deprecation</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">97%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">739ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># Helper variables for internal state tracking</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">explanation</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">95%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">2046ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># End of file</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">marker</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1201ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># ----- Section Divider -----</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">marker</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">98%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1097ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># pylint: disable=line-too-long</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">linter-directive</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1166ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># noqa: E501</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">linter-directive</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">1167ms</td>
+      </tr><tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:4px 8px;font-size:13px;font-family:monospace;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"># encoding: utf-8</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">encoding</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">No</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center">99%</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:center;background:#dcfce7">&#10003;</td>
+        <td style="padding:4px 8px;font-size:13px;text-align:right">904ms</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </div>
+  <div style="text-align:center;padding:16px 0;font-size:12px;color:#9ca3af">
+    Generated by InstructScan Evaluation Suite
+  </div>
+</div>
+</body>
+</html>

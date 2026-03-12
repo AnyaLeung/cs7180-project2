@@ -31,6 +31,14 @@ module.exports = [
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
+  {
+    files: ['src/__tests__/**/*.ts'],
+    rules: {
+      '@typescript-eslint/unbound-method': 'off',
+      '@typescript-eslint/require-await': 'off',
+      'no-undef': 'off',
+    },
+  },
   prettierConfig,
   { ignores: ['dist/**', 'node_modules/**', 'vitest.config.ts'] },
 ];

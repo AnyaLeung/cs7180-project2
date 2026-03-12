@@ -67,6 +67,52 @@ describe('mockApi', () => {
     expect(data.content).toContain('Step 1');
   });
 
+  it('mock POST /api/files uploads a file', async () => {
+    const { enableMockApi } = await import('../../utils/mockApi');
+    enableMockApi();
+
+    const formData = new FormData();
+    formData.append('file', new File(['# test content'], 'test.py', { type: 'text/x-python' }));
+
+    const res = await window.fetch('/api/files', {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await res.json() as { id: string; fileName: string; sizeBytes: number };
+    expect(res.status).toBe(200);
+    expect(data.fileName).toBe('test.py');
+    expect(data.id).toBeDefined();
+    expect(data.sizeBytes).toBeGreaterThan(0);
+  });
+
+  it('mock DELETE /api/files/:id removes a file', async () => {
+    const { enableMockApi } = await import('../../utils/mockApi');
+    enableMockApi();
+
+    const res = await window.fetch('/api/files/file-1', {
+      method: 'DELETE',
+    });
+    expect(res.status).toBe(204);
+  });
+
+  it('mock GET /api/files/:id/content returns default for unknown file', async () => {
+    const { enableMockApi } = await import('../../utils/mockApi');
+    enableMockApi();
+
+    const res = await window.fetch('/api/files/nonexistent/content');
+    const data = await res.json() as { content: string };
+    expect(res.status).toBe(200);
+    expect(data.content).toContain('Empty file');
+  });
+
+  it('handles request with no body', async () => {
+    const { enableMockApi } = await import('../../utils/mockApi');
+    enableMockApi();
+
+    const res = await window.fetch('/api/files');
+    expect(res.status).toBe(200);
+  });
+
   it('does not intercept scan-line route (passes through)', async () => {
     const { enableMockApi } = await import('../../utils/mockApi');
     enableMockApi();

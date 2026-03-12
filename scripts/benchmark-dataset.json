@@ -1,0 +1,202 @@
+[
+  {
+    "commentText": "# Step 1: Load the dataset from CSV",
+    "expectedIsInstruction": true,
+    "category": "data-loading"
+  },
+  {
+    "commentText": "# Clean missing values using forward fill",
+    "expectedIsInstruction": true,
+    "category": "data-cleaning"
+  },
+  {
+    "commentText": "# Filter rows where age > 18",
+    "expectedIsInstruction": true,
+    "category": "data-filtering"
+  },
+  {
+    "commentText": "# Plot the distribution of income",
+    "expectedIsInstruction": true,
+    "category": "visualization"
+  },
+  {
+    "commentText": "# Train a linear regression model",
+    "expectedIsInstruction": true,
+    "category": "modeling"
+  },
+  {
+    "commentText": "# Merge the two dataframes on customer_id",
+    "expectedIsInstruction": true,
+    "category": "data-merging"
+  },
+  {
+    "commentText": "# Split data into training and testing sets (80/20)",
+    "expectedIsInstruction": true,
+    "category": "data-splitting"
+  },
+  {
+    "commentText": "# Calculate the mean and standard deviation of each column",
+    "expectedIsInstruction": true,
+    "category": "statistics"
+  },
+  {
+    "commentText": "# Create a bar chart of sales by region",
+    "expectedIsInstruction": true,
+    "category": "visualization"
+  },
+  {
+    "commentText": "# Export the cleaned results to an Excel file",
+    "expectedIsInstruction": true,
+    "category": "data-export"
+  },
+  {
+    "commentText": "# Normalize the feature columns using min-max scaling",
+    "expectedIsInstruction": true,
+    "category": "feature-engineering"
+  },
+  {
+    "commentText": "# Remove duplicate rows based on the ID column",
+    "expectedIsInstruction": true,
+    "category": "data-cleaning"
+  },
+  {
+    "commentText": "# Compute the correlation matrix and find highly correlated features",
+    "expectedIsInstruction": true,
+    "category": "statistics"
+  },
+  {
+    "commentText": "# Generate summary statistics for all numeric columns",
+    "expectedIsInstruction": true,
+    "category": "statistics"
+  },
+  {
+    "commentText": "# Apply one-hot encoding to the categorical columns",
+    "expectedIsInstruction": true,
+    "category": "feature-engineering"
+  },
+  {
+    "commentText": "# Read data from the REST API endpoint and store as DataFrame",
+    "expectedIsInstruction": true,
+    "category": "data-loading"
+  },
+  {
+    "commentText": "# Build a random forest classifier with 100 trees",
+    "expectedIsInstruction": true,
+    "category": "modeling"
+  },
+  {
+    "commentText": "# Visualize the clusters using PCA with 2 components",
+    "expectedIsInstruction": true,
+    "category": "visualization"
+  },
+  {
+    "commentText": "# Group by category and aggregate total revenue",
+    "expectedIsInstruction": true,
+    "category": "data-aggregation"
+  },
+  {
+    "commentText": "# Save the trained model to disk using joblib",
+    "expectedIsInstruction": true,
+    "category": "model-persistence"
+  },
+  {
+    "commentText": "# Author: John Doe",
+    "expectedIsInstruction": false,
+    "category": "metadata"
+  },
+  {
+    "commentText": "# This is a helper function for formatting output",
+    "expectedIsInstruction": false,
+    "category": "explanation"
+  },
+  {
+    "commentText": "# Configuration section",
+    "expectedIsInstruction": false,
+    "category": "section-header"
+  },
+  {
+    "commentText": "# Version 2.0",
+    "expectedIsInstruction": false,
+    "category": "metadata"
+  },
+  {
+    "commentText": "# TODO: refactor later",
+    "expectedIsInstruction": false,
+    "category": "meta-comment"
+  },
+  {
+    "commentText": "# Copyright 2024 All rights reserved",
+    "expectedIsInstruction": false,
+    "category": "legal"
+  },
+  {
+    "commentText": "# Last modified: 2024-01-15",
+    "expectedIsInstruction": false,
+    "category": "metadata"
+  },
+  {
+    "commentText": "# This module handles data formatting utilities",
+    "expectedIsInstruction": false,
+    "category": "explanation"
+  },
+  {
+    "commentText": "# Note: requires Python 3.8+",
+    "expectedIsInstruction": false,
+    "category": "requirement"
+  },
+  {
+    "commentText": "# See documentation at https://docs.example.com",
+    "expectedIsInstruction": false,
+    "category": "reference"
+  },
+  {
+    "commentText": "# Type hints added for clarity",
+    "expectedIsInstruction": false,
+    "category": "explanation"
+  },
+  {
+    "commentText": "# Global constants defined below",
+    "expectedIsInstruction": false,
+    "category": "section-header"
+  },
+  {
+    "commentText": "# Unused for now — may revisit in v3",
+    "expectedIsInstruction": false,
+    "category": "meta-comment"
+  },
+  {
+    "commentText": "# Deprecated: use new_function() instead",
+    "expectedIsInstruction": false,
+    "category": "deprecation"
+  },
+  {
+    "commentText": "# Helper variables for internal state tracking",
+    "expectedIsInstruction": false,
+    "category": "explanation"
+  },
+  {
+    "commentText": "# End of file",
+    "expectedIsInstruction": false,
+    "category": "marker"
+  },
+  {
+    "commentText": "# ----- Section Divider -----",
+    "expectedIsInstruction": false,
+    "category": "marker"
+  },
+  {
+    "commentText": "# pylint: disable=line-too-long",
+    "expectedIsInstruction": false,
+    "category": "linter-directive"
+  },
+  {
+    "commentText": "# noqa: E501",
+    "expectedIsInstruction": false,
+    "category": "linter-directive"
+  },
+  {
+    "commentText": "# encoding: utf-8",
+    "expectedIsInstruction": false,
+    "category": "encoding"
+  }
+]

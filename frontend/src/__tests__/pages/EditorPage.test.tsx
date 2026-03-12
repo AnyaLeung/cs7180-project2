@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { EditorPage } from '../../pages/EditorPage';
 
@@ -118,6 +118,37 @@ describe('EditorPage', () => {
     renderEditorPage();
     await waitFor(() => {
       expect(screen.getByText('Open new file')).toBeInTheDocument();
+    });
+  });
+
+  it('clicking InstructScan header navigates to dashboard', async () => {
+    renderEditorPage();
+    await waitFor(() => {
+      expect(screen.getByText('InstructScan')).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText('InstructScan'));
+    expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
+  });
+
+  it('selecting a file navigates to its editor URL', async () => {
+    renderEditorPage();
+    await waitFor(() => {
+      expect(screen.getByText('data.py')).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText('data.py'));
+    expect(mockNavigate).toHaveBeenCalledWith('/editor/file-2');
+  });
+
+  it('handles file list load failure', async () => {
+    mockGet.mockImplementation((path: string) => {
+      if (path === '/api/files') return Promise.reject(new Error('network fail'));
+      if (path.includes('/content')) return Promise.resolve({ content: '# ok' });
+      return Promise.resolve([]);
+    });
+
+    renderEditorPage();
+    await waitFor(() => {
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
   });
 });
