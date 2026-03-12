@@ -53,12 +53,20 @@ export function EditorPage() {
   useEffect(() => {
     if (!fileId) return;
 
+    let cancelled = false;
+    const loadContent = async () => {
+      try {
+        const data = await api.get<FileContent>(`/api/files/${fileId}/content`);
+        if (!cancelled) setContent(data.content);
+      } catch {
+        if (!cancelled) setContent('# Failed to load file');
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
     setLoading(true);
-    api
-      .get<FileContent>(`/api/files/${fileId}/content`)
-      .then((data) => setContent(data.content))
-      .catch(() => setContent('# Failed to load file'))
-      .finally(() => setLoading(false));
+    void loadContent();
+    return () => { cancelled = true; };
   }, [fileId]);
 
   const handleSelectFile = useCallback(
