@@ -1,90 +1,137 @@
-import { hoverTooltip, type Tooltip } from '@codemirror/view';
-import { EditorView } from '@codemirror/view';
+import { EditorView, showTooltip, type Tooltip } from '@codemirror/view';
+import { StateField, StateEffect } from '@codemirror/state';
 import { detectInstruction, generateContent, type InstructionAction } from '../hooks/useInstructionDetect';
 import { createInstructionButtonsElement } from '../components/InstructionButtons';
 
-function getLineText(view: EditorView, pos: number): { lineNumber: number; text: string } | null {
-  const line = view.state.doc.lineAt(pos);
-  return { lineNumber: line.number, text: line.text };
-}
+const setTooltip = StateEffect.define<Tooltip | null>();
+
+const tooltipField = StateField.define<Tooltip | null>({
+  create: () => null,
+  update(value, tr) {
+    for (const e of tr.effects) {
+      if (e.is(setTooltip)) return e.value;
+    }
+    return value;
+  },
+  provide: (f) => showTooltip.from(f),
+});
 
 function isCommentLine(text: string): boolean {
   return text.trimStart().startsWith('#');
 }
 
-export function instructionHoverTooltip() {
-  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
-  let lastLineNumber: number | null = null;
+let lastDetectedLine: number | null = null;
+let detecting = false;
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-  return hoverTooltip(
-    (view, pos) => {
-      const lineInfo = getLineText(view, pos);
-      if (!lineInfo || !isCommentLine(lineInfo.text)) return null;
+const cursorListener = EditorView.updateListener.of((update) => {
+  if (!update.selectionSet && !update.docChanged) return;
 
-      if (lineInfo.lineNumber === lastLineNumber) return null;
+  const view = update.view;
+  const pos = view.state.selection.main.head;
+  const line = view.state.doc.lineAt(pos);
 
-      if (debounceTimer) clearTimeout(debounceTimer);
+  if (!isCommentLine(line.text)) {
+    if (lastDetectedLine !== null) {
+      lastDetectedLine = null;
+      view.dispatch({ effects: setTooltip.of(null) });
+    }
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+      debounceTimer = null;
+    }
+    return;
+  }
 
-      return new Promise<Tooltip | null>((resolve) => {
-        debounceTimer = setTimeout(async () => {
-          const info = getLineText(view, pos);
-          if (!info || !isCommentLine(info.text)) {
-            resolve(null);
-            return;
-          }
+  if (line.number === lastDetectedLine) return;
 
-          const isInstruction = await detectInstruction(info.text);
-          if (!isInstruction) {
-            resolve(null);
-            return;
-          }
+  // Clear previous tooltip while detecting new line
+  view.dispatch({ effects: setTooltip.of(null) });
 
-          lastLineNumber = info.lineNumber;
+  if (debounceTimer) clearTimeout(debounceTimer);
 
-          resolve({
-            pos: view.state.doc.line(info.lineNumber).from,
-            above: false,
-            create: () => {
-              let loading = false;
+  debounceTimer = setTimeout(() => {
+    void detectAndShow(view, line.number, line.text, line.from);
+  }, 300);
+});
 
-              const handleAction = async (action: InstructionAction) => {
-                if (loading) return;
-                loading = true;
-                dom.replaceChildren(
-                  createInstructionButtonsElement(handleAction, true)
-                );
+async function detectAndShow(
+  view: EditorView,
+  lineNumber: number,
+  text: string,
+  lineFrom: number
+) {
+  if (detecting) return;
+  detecting = true;
 
-                const fileContent = view.state.doc.toString();
-                const generated = await generateContent(info.text, action, fileContent);
+  try {
+    const isInstr = await detectInstruction(text);
 
-                const currentLine = view.state.doc.line(info.lineNumber);
-                const insertPos = currentLine.to;
+    // Verify cursor is still on the same line after async call
+    const currentPos = view.state.selection.main.head;
+    const currentLine = view.state.doc.lineAt(currentPos);
+    if (currentLine.number !== lineNumber) {
+      detecting = false;
+      return;
+    }
 
-                view.dispatch({
-                  changes: { from: insertPos, insert: generated },
-                });
+    if (!isInstr) {
+      lastDetectedLine = lineNumber;
+      detecting = false;
+      return;
+    }
 
-                loading = false;
-                lastLineNumber = null;
-              };
+    lastDetectedLine = lineNumber;
 
-              const dom = document.createElement('div');
-              dom.className = 'cm-instruction-tooltip';
-              dom.appendChild(createInstructionButtonsElement(handleAction, false));
+    const tooltip: Tooltip = {
+      pos: lineFrom,
+      above: false,
+      strictSide: true,
+      arrow: false,
+      create: () => {
+        let loading = false;
 
-              return { dom };
-            },
+        const handleAction = async (action: InstructionAction) => {
+          if (loading) return;
+          loading = true;
+          dom.replaceChildren(createInstructionButtonsElement(handleAction, true));
+
+          const fileContent = view.state.doc.toString();
+          const generated = await generateContent(text, action, fileContent);
+
+          const targetLine = view.state.doc.line(lineNumber);
+          view.dispatch({
+            changes: { from: targetLine.to, insert: generated },
+            effects: setTooltip.of(null),
           });
-        }, 300);
-      });
-    },
-    { hideOnChange: true, hoverTime: 100 }
-  );
+
+          loading = false;
+          lastDetectedLine = null;
+        };
+
+        const dom = document.createElement('div');
+        dom.className = 'cm-instruction-tooltip';
+        dom.appendChild(createInstructionButtonsElement(handleAction, false));
+        return { dom };
+      },
+    };
+
+    view.dispatch({ effects: setTooltip.of(tooltip) });
+  } catch {
+    // detection failed
+  } finally {
+    detecting = false;
+  }
+}
+
+export function instructionHoverTooltip() {
+  return [tooltipField, cursorListener];
 }
 
 export const tooltipBaseTheme = EditorView.baseTheme({
   '.cm-tooltip.cm-instruction-tooltip': {
     backgroundColor: 'transparent',
     border: 'none',
+    zIndex: '100',
   },
 });

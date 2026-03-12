@@ -117,44 +117,7 @@ const routes: RouteHandler[] = [
     return { status: 200, body: { content } };
   },
 
-  // POST /api/scan-line
-  (method, url, body) => {
-    if (method !== 'POST' || !url.pathname.endsWith('/api/scan-line')) return null;
-    const { commentText } = body as Record<string, string>;
-    const lower = (commentText ?? '').toLowerCase();
-    const patterns = [
-      /step\s*\d/, /todo/, /load/, /clean/, /filter/, /merge/, /plot/,
-      /train/, /split/, /import/, /create/, /build/, /compute/, /calculate/,
-      /transform/, /process/, /analyze/, /visualize/, /export/, /save/,
-      /read/, /write/, /generate/, /implement/,
-    ];
-    const isInstruction = patterns.some((p) => p.test(lower));
-    return {
-      status: 200,
-      body: { isInstruction, confidence: isInstruction ? 0.92 : 0.15 },
-    };
-  },
-
-  // POST /api/generate
-  (method, url, body) => {
-    if (method !== 'POST' || !url.pathname.endsWith('/api/generate')) return null;
-    const { commentText, action } = body as Record<string, string>;
-    const clean = (commentText ?? '').replace(/^#\s*/, '').trim();
-
-    let generatedText = '';
-    switch (action) {
-      case 'write-code':
-        generatedText = `\nimport pandas as pd\n\n# Implementation: ${clean}\ndf = pd.read_csv("data.csv")\nresult = df.describe()\nprint(result)\n`;
-        break;
-      case 'detail-plan':
-        generatedText = `\n# Detailed plan for: ${clean}\n# 1. Set up the environment and import libraries\n# 2. Define input/output paths\n# 3. Execute the core logic\n# 4. Validate results against expected output\n# 5. Log and handle any errors\n`;
-        break;
-      case 'alternative-plan':
-        generatedText = `\n# Alternative approach for: ${clean}\n# Option A: Use a streaming approach for large datasets\n# Option B: Use SQL queries instead of pandas\n# Option C: Break into parallel sub-tasks\n`;
-        break;
-    }
-    return { status: 200, body: { generatedText } };
-  },
+  // scan-line and generate are NOT mocked — they pass through to the real API server
 ];
 
 function parseBody(init?: RequestInit): Record<string, unknown> | FormData | null {
@@ -203,7 +166,7 @@ function mockFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Respon
 export function enableMockApi() {
   window.fetch = mockFetch as typeof window.fetch;
   console.log(
-    '%c[MockAPI] Enabled — all /api/* calls return fake data',
+    '%c[MockAPI] Enabled — auth & files mocked, scan-line & generate pass through to real API',
     'color: #a78bfa; font-weight: bold'
   );
 }

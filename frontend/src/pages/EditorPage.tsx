@@ -2,10 +2,10 @@ import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../utils/api';
 import { useAuth } from '../hooks/useAuth';
+import { useFileUpload, type FileInfo } from '../hooks/useFileUpload';
 import { FileList } from '../components/FileList';
 import { CodeEditor } from '../components/CodeEditor';
 import { instructionHoverTooltip, tooltipBaseTheme } from '../utils/hoverExtension';
-import type { FileInfo } from '../hooks/useFileUpload';
 
 interface FileContent {
   content: string;
@@ -31,6 +31,24 @@ export function EditorPage() {
     }
     void loadFiles();
   }, []);
+
+  const handleUploadSuccess = useCallback(
+    (file: FileInfo) => {
+      setFiles((prev) => [file, ...prev]);
+      navigate(`/editor/${file.id}`);
+    },
+    [navigate]
+  );
+
+  const { uploadState, upload, clearError } = useFileUpload(handleUploadSuccess);
+
+  const handleUploadFile = useCallback(
+    (file: File) => {
+      clearError();
+      void upload(file);
+    },
+    [upload, clearError]
+  );
 
   useEffect(() => {
     if (!fileId) return;
@@ -74,6 +92,8 @@ export function EditorPage() {
           files={files}
           selectedId={fileId ?? null}
           onSelect={handleSelectFile}
+          onUpload={handleUploadFile}
+          uploadState={uploadState}
         />
 
         <main className="flex-1 overflow-hidden">
