@@ -32,8 +32,29 @@ async function request<T>(
   return res.json() as Promise<T>;
 }
 
+async function requestText(path: string, options: RequestInit = {}): Promise<string> {
+  const token = getToken();
+  const headers: Record<string, string> = {
+    ...(options.headers as Record<string, string>),
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({ error: res.statusText }));
+    throw new Error((body as { error?: string }).error ?? `Request failed: ${res.status}`);
+  }
+
+  return res.text();
+}
+
 export const api = {
   get: <T>(path: string) => request<T>(path),
+  getText: (path: string) => requestText(path),
 
   post: <T>(path: string, body?: unknown) =>
     request<T>(path, {

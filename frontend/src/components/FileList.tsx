@@ -1,6 +1,7 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState } from 'react';
 import type { FileInfo } from '../hooks/useFileUpload';
 import type { UploadState } from '../hooks/useFileUpload';
+import { api } from '../utils/api';
 
 interface FileListProps {
   files: FileInfo[];
@@ -12,6 +13,7 @@ interface FileListProps {
 
 export function FileList({ files, selectedId, onSelect, onUpload, uploadState }: FileListProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +23,36 @@ export function FileList({ files, selectedId, onSelect, onUpload, uploadState }:
     },
     [onUpload]
   );
+
+  const handleDownloadInstructions = useCallback(async (file: FileInfo) => {
+    try {
+      setDownloadingId(file.id);
+      const scans = await api.get<{ id: string; scannedAt: string; instructionCount: number }[]>(
+        `/api/files/${file.id}/scans`
+      );
+      const latest = scans[0];
+      if (!latest) {
+        alert('No scan history for this file yet. Run Scan in the editor first.');
+        return;
+      }
+
+      const text = await api.getText(`/api/scans/${latest.id}/download`);
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${file.fileName.replace(/[^a-zA-Z0-9._-]+/g, '_')}-instructions.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Download failed';
+      alert(msg);
+    } finally {
+      setDownloadingId(null);
+    }
+  }, []);
 
   return (
     <aside className="w-48 flex-shrink-0 border-r border-gray-800 flex flex-col bg-gray-950">
@@ -34,17 +66,51 @@ export function FileList({ files, selectedId, onSelect, onUpload, uploadState }:
           <p className="px-3 py-2 text-xs text-gray-600">No files</p>
         )}
         {files.map((f) => (
-          <button
+          <div
             key={f.id}
-            onClick={() => onSelect(f.id)}
-            className={`w-full text-left px-3 py-2 text-sm rounded transition-colors ${
+            className={`w-full px-3 py-2 text-sm rounded transition-colors flex items-center justify-between gap-2 ${
               selectedId === f.id
                 ? 'bg-gray-800 text-white border-l-2 border-purple-500'
                 : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
             }`}
           >
-            {f.fileName}
-          </button>
+            <button
+              onClick={() => onSelect(f.id)}
+              className="flex-1 text-left truncate"
+              title={f.fileName}
+            >
+              {f.fileName}
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                void handleDownloadInstructions(f);
+              }}
+              disabled={downloadingId === f.id}
+              className="text-xs text-gray-300 hover:text-white disabled:opacity-50"
+              title="download whole file instructions"
+              aria-label="download whole file instructions"
+            >
+              {downloadingId === f.id ? (
+                '...'
+              ) : (
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <path d="M7 10l5 5 5-5" />
+                  <path d="M12 15V3" />
+                </svg>
+              )}
+            </button>
+          </div>
         ))}
       </div>
 
