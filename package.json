@@ -1,0 +1,10 @@
+{
+  "name": "cs7180-project2",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix backend",
+    "lint": "npm run lint --prefix backend",
+    "test": "npm run test --prefix backend",
+    "build": "npm run build --prefix backend"
+  }
+}
