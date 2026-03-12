@@ -40,6 +40,85 @@ export interface UploadResult {
   uploadedAt: string;
 }
 
+interface ExampleFileInternal {
+  id: string;
+  filename: string;
+  sizeBytes: number;
+  uploadedAt: string;
+  content: string;
+}
+
+const EXAMPLE_FILES: ExampleFileInternal[] = [
+  {
+    id: 'example-1',
+    filename: 'analysis_plan.py',
+    content: `# Step 1: Load the dataset from CSV
+# Step 2: Clean missing values
+# Step 3: Filter rows where age > 18
+# Step 4: Compute summary statistics
+# Step 5: Visualize the distribution of income
+
+import pandas as pd
+
+# This is just a regular comment, not an instruction
+# Author: demo user
+
+df = pd.read_csv("data.csv")
+print(df.head())
+`,
+    sizeBytes: Buffer.byteLength(
+      `# Step 1: Load the dataset from CSV
+# Step 2: Clean missing values
+# Step 3: Filter rows where age > 18
+# Step 4: Compute summary statistics
+# Step 5: Visualize the distribution of income
+
+import pandas as pd
+
+# This is just a regular comment, not an instruction
+# Author: demo user
+
+df = pd.read_csv("data.csv")
+print(df.head())
+`,
+      'utf8'
+    ),
+    uploadedAt: new Date(0).toISOString(),
+  },
+  {
+    id: 'example-2',
+    filename: 'data_cleaning.py',
+    content: `# Step 1: Read raw data from the API
+# Step 2: Transform column names to snake_case
+
+
+import pandas as pd
+import requests
+# Step 3: Merge with the reference table
+# Step 4: Export cleaned data to Parquet
+
+# Configuration
+API_URL = "https://api.example.com/data"
+`,
+    sizeBytes: Buffer.byteLength(
+      `# Step 1: Read raw data from the API
+# Step 2: Transform column names to snake_case
+
+
+import pandas as pd
+import requests
+# Step 3: Merge with the reference table
+# Step 4: Export cleaned data to Parquet
+
+# Configuration
+API_URL = "https://api.example.com/data"
+`,
+      'utf8'
+    ),
+    uploadedAt: new Date(0).toISOString(),
+  },
+];
+
 function toCamelCase(row: FileRecord): UploadResult {
   return {
     id: row.id,
@@ -99,7 +178,15 @@ export async function listByUserId(userId: string): Promise<UploadResult[]> {
     .order('uploaded_at', { ascending: false });
 
   if (error) throw error;
-  return (data ?? []).map((row) => toCamelCase(row as FileRecord));
+  const dbFiles = (data ?? []).map((row) => toCamelCase(row as FileRecord));
+  const exampleFiles: UploadResult[] = EXAMPLE_FILES.map((f) => ({
+    id: f.id,
+    filename: f.filename,
+    storagePath: `examples/${f.id}.py`,
+    sizeBytes: f.sizeBytes,
+    uploadedAt: f.uploadedAt,
+  }));
+  return [...exampleFiles, ...dbFiles];
 }
 
 export async function deleteById(
@@ -129,6 +216,11 @@ export async function getFileContentById(
   fileId: string,
   userId: string
 ): Promise<{ content: string; filename: string } | 'not_found' | 'forbidden'> {
+  const example = EXAMPLE_FILES.find((f) => f.id === fileId);
+  if (example) {
+    return { content: example.content, filename: example.filename };
+  }
+
   const { data: row, error: fetchError } = await supabase
     .from('files')
     .select('filename, storage_path, user_id')

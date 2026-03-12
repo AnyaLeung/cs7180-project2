@@ -65,3 +65,29 @@ export async function deleteFile(req: Request, res: Response): Promise<void> {
   }
   res.status(204).send();
 }
+
+export async function getContent(req: Request, res: Response): Promise<void> {
+  const userId = req.userId;
+  const fileId = req.params.id;
+
+  if (!userId) {
+    res.status(401).json({ message: 'Unauthorized' });
+    return;
+  }
+  if (!fileId) {
+    res.status(400).json({ message: 'File id is required' });
+    return;
+  }
+
+  const result = await fileService.getFileContentById(fileId, userId);
+  if (result === 'not_found') {
+    res.status(404).json({ message: 'File not found' });
+    return;
+  }
+  if (result === 'forbidden') {
+    res.status(403).json({ message: 'Forbidden' });
+    return;
+  }
+
+  res.status(200).json({ content: result.content });
+}

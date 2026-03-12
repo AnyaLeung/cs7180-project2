@@ -11,6 +11,15 @@ const upload = multer({
 });
 
 router.post(
+  '/',
+  authMiddleware,
+  upload.single('file'),
+  (req, res, next) => {
+    void fileController.upload(req, res).catch(next);
+  }
+);
+
+router.post(
   '/upload',
   authMiddleware,
   upload.single('file'),
@@ -25,6 +34,10 @@ router.get('/', authMiddleware, (req, res, next) => {
 
 router.delete('/:id', authMiddleware, (req, res, next) => {
   void fileController.deleteFile(req, res).catch(next);
+});
+
+router.get('/:id/content', authMiddleware, (req, res, next) => {
+  void fileController.getContent(req, res).catch(next);
 });
 
 router.post('/:id/scan', authMiddleware, (req, res, next) => {

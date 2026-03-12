@@ -12,7 +12,7 @@ beforeAll(async () => {
 
 async function getToken(): Promise<string> {
   const email = uniqueEmail();
-  const res = await request(app).post('/auth/register').send({ email, password: 'p' });
+  const res = await request(app).post('/api/auth/register').send({ email, password: 'p' });
   expect(res.status).toBe(201);
   return (res.body as { token: string }).token;
 }
@@ -22,18 +22,18 @@ const smallPyContent = Buffer.from('# test\nprint("hi")\n');
 describe('Files (unauthenticated → 401)', () => {
   it('POST /files/upload returns 401 without Authorization', async () => {
     const res = await request(app)
-      .post('/files/upload')
+      .post('/api/files/upload')
       .attach('file', smallPyContent, 'test.py');
     expect(res.status).toBe(401);
   });
 
   it('GET /files returns 401 without Authorization', async () => {
-    const res = await request(app).get('/files');
+    const res = await request(app).get('/api/files');
     expect(res.status).toBe(401);
   });
 
   it('DELETE /files/:id returns 401 without Authorization', async () => {
-    const res = await request(app).delete('/files/00000000-0000-0000-0000-000000000001');
+    const res = await request(app).delete('/api/files/00000000-0000-0000-0000-000000000001');
     expect(res.status).toBe(401);
   });
 });
@@ -42,7 +42,7 @@ describe('POST /files/upload', () => {
   it('returns 201 with camelCase body for valid .py file', async () => {
     const token = await getToken();
     const res = await request(app)
-      .post('/files/upload')
+      .post('/api/files/upload')
       .set('Authorization', `Bearer ${token}`)
       .attach('file', smallPyContent, 'script.py');
     expect(res.status).toBe(201);
@@ -56,7 +56,7 @@ describe('POST /files/upload', () => {
   it('returns 400 when no file uploaded', async () => {
     const token = await getToken();
     const res = await request(app)
-      .post('/files/upload')
+      .post('/api/files/upload')
       .set('Authorization', `Bearer ${token}`);
     expect(res.status).toBe(400);
     expect((res.body as { message?: string }).message).toMatch(/no file/i);
@@ -65,7 +65,7 @@ describe('POST /files/upload', () => {
   it('returns 400 for non-.py file', async () => {
     const token = await getToken();
     const res = await request(app)
-      .post('/files/upload')
+      .post('/api/files/upload')
       .set('Authorization', `Bearer ${token}`)
       .attach('file', Buffer.from('text'), 'readme.txt');
     expect(res.status).toBe(400);
@@ -77,7 +77,7 @@ describe('GET /files', () => {
   it('returns 200 with array of files in camelCase', async () => {
     const token = await getToken();
     const res = await request(app)
-      .get('/files')
+      .get('/api/files')
       .set('Authorization', `Bearer ${token}`);
     expect(res.status).toBe(200);
     const list = res.body as { id: string; filename: string; storagePath: string; sizeBytes: number; uploadedAt: string }[];
@@ -96,19 +96,19 @@ describe('DELETE /files/:id', () => {
   it('returns 204 and file is removed from list', async () => {
     const token = await getToken();
     const uploadRes = await request(app)
-      .post('/files/upload')
+      .post('/api/files/upload')
       .set('Authorization', `Bearer ${token}`)
       .attach('file', smallPyContent, 'to-delete.py');
     expect(uploadRes.status).toBe(201);
     const fileId = (uploadRes.body as { id: string }).id;
 
     const deleteRes = await request(app)
-      .delete(`/files/${fileId}`)
+      .delete(`/api/files/${fileId}`)
       .set('Authorization', `Bearer ${token}`);
     expect(deleteRes.status).toBe(204);
 
     const listRes = await request(app)
-      .get('/files')
+      .get('/api/files')
       .set('Authorization', `Bearer ${token}`);
     expect(listRes.status).toBe(200);
     const ids = (listRes.body as { id: string }[]).map((f) => f.id);
@@ -118,7 +118,7 @@ describe('DELETE /files/:id', () => {
   it('returns 404 for nonexistent file id', async () => {
     const token = await getToken();
     const res = await request(app)
-      .delete('/files/00000000-0000-0000-0000-000000000099')
+      .delete('/api/files/00000000-0000-0000-0000-000000000099')
       .set('Authorization', `Bearer ${token}`);
     expect(res.status).toBe(404);
   });
@@ -127,14 +127,14 @@ describe('DELETE /files/:id', () => {
     const tokenA = await getToken();
     const tokenB = await getToken();
     const uploadRes = await request(app)
-      .post('/files/upload')
+      .post('/api/files/upload')
       .set('Authorization', `Bearer ${tokenA}`)
       .attach('file', smallPyContent, 'user-a.py');
     expect(uploadRes.status).toBe(201);
     const fileId = (uploadRes.body as { id: string }).id;
 
     const res = await request(app)
-      .delete(`/files/${fileId}`)
+      .delete(`/api/files/${fileId}`)
       .set('Authorization', `Bearer ${tokenB}`);
     expect(res.status).toBe(403);
   });
