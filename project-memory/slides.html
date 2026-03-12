@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InstructScan — Demo Slides</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0f;
+    color: #e2e8f0;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .slide.active { display: flex; }
+
+  .slide-number {
+    position: fixed;
+    bottom: 24px;
+    right: 40px;
+    font-size: 14px;
+    color: #64748b;
+  }
+
+  .nav-hint {
+    position: fixed;
+    bottom: 24px;
+    left: 40px;
+    font-size: 13px;
+    color: #475569;
+  }
+
+  h1 {
+    font-size: 56px;
+    font-weight: 700;
+    font-style: italic;
+    color: #a78bfa;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 32px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #a78bfa;
+    margin-bottom: 16px;
+    margin-top: 32px;
+  }
+
+  p, li {
+    font-size: 22px;
+    line-height: 1.6;
+    color: #cbd5e1;
+  }
+
+  ul { list-style: none; padding-left: 0; }
+
+  li {
+    padding: 6px 0;
+    padding-left: 24px;
+    position: relative;
+  }
+
+  li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #a78bfa;
+  }
+
+  .subtitle {
+    font-size: 24px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+  }
+
+  .authors {
+    font-size: 22px;
+    color: #64748b;
+    margin-top: 12px;
+  }
+
+  .highlight { color: #a78bfa; font-weight: 600; }
+  .green { color: #4ade80; }
+  .red { color: #f87171; }
+  .yellow { color: #fbbf24; }
+  .dim { color: #64748b; }
+
+  .code-block {
+    background: #1e1e2e;
+    border: 1px solid #2d2d3f;
+    border-radius: 12px;
+    padding: 24px 28px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 16px 0;
+    white-space: pre;
+    overflow-x: auto;
+    color: #a6adc8;
+  }
+
+  .code-block .comment { color: #6c7086; }
+  .code-block .keyword { color: #cba6f7; }
+  .code-block .string { color: #a6e3a1; }
+  .code-block .func { color: #89b4fa; }
+
+  .arch-box {
+    background: #1e1e2e;
+    border: 1px solid #2d2d3f;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 16px 0;
+  }
+
+  .arch-row {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 18px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .arch-row .label {
+    min-width: 320px;
+    color: #89b4fa;
+  }
+
+  .arch-row .arrow {
+    color: #6c7086;
+    margin: 0 12px;
+  }
+
+  .arch-row .target {
+    color: #a6e3a1;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 16px;
+  }
+
+  .col {
+    background: #1e1e2e;
+    border: 1px solid #2d2d3f;
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .col h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .col ul li { font-size: 18px; padding: 4px 0; }
+
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 3px 4px;
+  }
+
+  .tag-purple { background: #a78bfa22; color: #a78bfa; border: 1px solid #a78bfa44; }
+  .tag-blue { background: #89b4fa22; color: #89b4fa; border: 1px solid #89b4fa44; }
+  .tag-green { background: #a6e3a122; color: #a6e3a1; border: 1px solid #a6e3a144; }
+  .tag-yellow { background: #fbbf2422; color: #fbbf24; border: 1px solid #fbbf2444; }
+  .tag-red { background: #f8717122; color: #f87171; border: 1px solid #f8717144; }
+
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 12px 0;
+  }
+
+  .comp-card {
+    background: #1e1e2e;
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+
+  .comp-card.bad { border: 1px solid #f8717144; }
+  .comp-card.good { border: 1px solid #4ade8044; }
+
+  .comp-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .comp-code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 16px;
+    color: #a6adc8;
+  }
+
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .big-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #a78bfa;
+  }
+</style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide active" id="s1">
+  <div class="center-content" style="gap: 16px;">
+    <h1 style="font-size: 72px;">InstructScan</h1>
+    <p class="subtitle" style="font-size: 28px;">AI-Powered Instruction Detection for Python Data Analysis</p>
+    <div style="margin-top: 24px;">
+      <span class="tag tag-purple">React + TypeScript</span>
+      <span class="tag tag-blue">CodeMirror 6</span>
+      <span class="tag tag-green">Express + Supabase</span>
+      <span class="tag tag-yellow">Claude API</span>
+    </div>
+    <p class="authors" style="margin-top: 32px;">Zhiping Zhang &nbsp;&middot;&nbsp; Qiushi Liang</p>
+    <p class="dim" style="font-size: 18px;">CS7180 &mdash; Project 2</p>
+  </div>
+</div>
+
+<!-- Slide 2: The Problem -->
+<div class="slide" id="s2">
+  <h2>The Problem</h2>
+  <p style="font-size: 24px; margin-bottom: 24px;">Data analysts write plans as Python comments before coding:</p>
+  <div class="code-block"><span class="comment"># Step 1: Load the dataset from CSV</span>
+<span class="comment"># Step 2: Clean missing values</span>
+<span class="comment"># Step 3: Filter rows where age > 18</span>
+<span class="comment"># Step 4: Compute summary statistics</span>
+<span class="comment"># Step 5: Visualize the distribution of income</span>
+
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+
+<span class="comment"># ... then manually write all the code ...</span>
+<span class="func">pass</span></div>
+  <ul style="margin-top: 16px;">
+    <li>Every comment needs to be manually translated into code</li>
+    <li>Repetitive, breaks the analyst's flow of thinking</li>
+    <li><span class="highlight">What if the editor could understand these comments?</span></li>
+  </ul>
+</div>
+
+<!-- Slide 3: The Solution -->
+<div class="slide" id="s3">
+  <h2>The Solution</h2>
+  <p style="font-size: 24px; margin-bottom: 24px;">Click a comment line &rarr; Claude classifies it &rarr; Take action</p>
+  <div class="two-col">
+    <div class="col">
+      <h4 style="color: #a78bfa;">How it works</h4>
+      <ul>
+        <li>Click on any <code>#</code> comment line in the editor</li>
+        <li>Claude API classifies: instruction or not?</li>
+        <li>If instruction &rarr; show 3 action buttons</li>
+        <li>Generated content inserted inline</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4 style="color: #a78bfa;">Three Actions</h4>
+      <ul>
+        <li><span class="green">Write Code</span> &mdash; Generate Python implementation</li>
+        <li><span class="yellow">Detail Plan</span> &mdash; Expand into sub-steps</li>
+        <li><span class="highlight">Alternative Plan</span> &mdash; Suggest different approach</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: Architecture -->
+<div class="slide" id="s4">
+  <h2>Architecture</h2>
+  <div class="arch-box">
+    <div style="margin-bottom: 12px; font-size: 15px; color: #6c7086; text-transform: uppercase; letter-spacing: 1px;">Frontend &mdash; React + CodeMirror 6 + Tailwind CSS</div>
+    <div class="arch-row">
+      <span class="label">POST /auth/register, /auth/login</span>
+      <span class="arrow">&rarr;</span>
+      <span class="target">Express Backend &rarr; Supabase <code>users</code></span>
+    </div>
+    <div class="arch-row">
+      <span class="label">POST /files/upload, GET /files</span>
+      <span class="arrow">&rarr;</span>
+      <span class="target">Express Backend &rarr; Supabase Storage + <code>files</code></span>
+    </div>
+    <div class="arch-row">
+      <span class="label">POST /files/:id/scan</span>
+      <span class="arrow">&rarr;</span>
+      <span class="target">Express Backend &rarr; Claude API + <code>scans</code></span>
+    </div>
+    <div style="border-top: 1px solid #2d2d3f; margin: 12px 0;"></div>
+    <div class="arch-row">
+      <span class="label">POST /api/scan-line</span>
+      <span class="arrow">&rarr;</span>
+      <span class="target">Vercel Serverless &rarr; Claude API</span>
+    </div>
+    <div class="arch-row">
+      <span class="label">POST /api/generate</span>
+      <span class="arrow">&rarr;</span>
+      <span class="target">Vercel Serverless &rarr; Claude API</span>
+    </div>
+  </div>
+  <div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+    <span class="tag tag-purple">TypeScript Strict</span>
+    <span class="tag tag-blue">JWT + bcrypt (cost 12)</span>
+    <span class="tag tag-green">Supabase RLS</span>
+    <span class="tag tag-yellow">claude-sonnet-4-6</span>
+    <span class="tag tag-red">Confidence &ge; 0.6</span>
+  </div>
+</div>
+
+<!-- Slide 5: Design Evolution -->
+<div class="slide" id="s5">
+  <h2>Design Evolution</h2>
+  <div class="two-col">
+    <div class="col" style="border-color: #f8717144;">
+      <h4 style="color: #f87171;">Original Mockup</h4>
+      <ul>
+        <li><span class="red">Run Scan</span> button &mdash; batch scan entire file</li>
+        <li>Right sidebar listing all instructions</li>
+        <li>History and Settings tabs</li>
+        <li>Instruction types: Run, Modify, Delete, Generate, Other</li>
+      </ul>
+    </div>
+    <div class="col" style="border-color: #4ade8044;">
+      <h4 style="color: #4ade80;">Final Design</h4>
+      <ul>
+        <li><span class="green">Click-to-detect</span> &mdash; per-line, real-time</li>
+        <li>Inline action buttons below the comment</li>
+        <li>No sidebar, no tabs &mdash; minimal UI</li>
+        <li>Three actions: Write Code, Detail Plan, Alternative</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top: 24px; font-size: 20px; color: #94a3b8;">
+    Two layers of intelligence: <span class="highlight">batch scanning</span> for overview (backend) + <span class="highlight">per-line detection</span> for interactive editing (frontend)
+  </p>
+</div>
+
+<!-- Slide 6: Live Demo (transition slide) -->
+<div class="slide" id="s6">
+  <div class="center-content" style="gap: 24px;">
+    <h2 style="font-size: 48px;">Live Demo</h2>
+    <p style="font-size: 24px; color: #94a3b8;">Login &rarr; Dashboard &rarr; Editor &rarr; Instruction Detection &rarr; Code Generation</p>
+    <div style="margin-top: 24px; display: flex; gap: 16px;">
+      <span class="tag tag-purple" style="font-size: 18px; padding: 8px 20px;">Write Code</span>
+      <span class="tag tag-yellow" style="font-size: 18px; padding: 8px 20px;">Detail Plan</span>
+      <span class="tag tag-blue" style="font-size: 18px; padding: 8px 20px;">Alternative Plan</span>
+    </div>
+    <p class="dim" style="margin-top: 40px; font-size: 16px;">[ Switch to screen recording ]</p>
+  </div>
+</div>
+
+<!-- Slide 7: .cursorrules -->
+<div class="slide" id="s7">
+  <h2>The <code>.cursorrules</code> File</h2>
+  <p style="margin-bottom: 20px;">A configuration file that tells Cursor AI how to write code for our project:</p>
+  <div class="two-col">
+    <div class="col">
+      <h4 style="color: #89b4fa;">Conventions</h4>
+      <ul>
+        <li>React components: <code>PascalCase</code></li>
+        <li>Functions/variables: <code>camelCase</code></li>
+        <li>API routes: <code>kebab-case</code></li>
+        <li>DB &rarr; API: snake_case &rarr; camelCase</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4 style="color: #89b4fa;">Rules</h4>
+      <ul>
+        <li>LLM: <code>claude-sonnet-4-6</code> only</li>
+        <li>Confidence threshold: <code>0.6</code></li>
+        <li>TDD, 70% coverage minimum</li>
+        <li>Always test unauthenticated requests</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top: 24px; font-size: 20px; color: #94a3b8;">
+    Think of it as the project's <span class="highlight">constitution</span> &mdash; every AI-generated line of code follows these rules.
+  </p>
+</div>
+
+<!-- Slide 8: With vs Without Rules -->
+<div class="slide" id="s8">
+  <h2>With vs Without Rules</h2>
+  <div class="comparison-row">
+    <div class="comp-card bad">
+      <div class="comp-label red">Without Rules</div>
+      <div class="comp-code">upload.tsx</div>
+    </div>
+    <div class="comp-card good">
+      <div class="comp-label green">With Rules</div>
+      <div class="comp-code">FileUploader.tsx</div>
+    </div>
+  </div>
+  <div class="comparison-row">
+    <div class="comp-card bad">
+      <div class="comp-label red">Without Rules</div>
+      <div class="comp-code">{ size_bytes: 1024, uploaded_at: "..." }</div>
+    </div>
+    <div class="comp-card good">
+      <div class="comp-label green">With Rules</div>
+      <div class="comp-code">{ sizeBytes: 1024, uploadedAt: "..." }</div>
+    </div>
+  </div>
+  <div class="comparison-row">
+    <div class="comp-card bad">
+      <div class="comp-label red">Without Rules</div>
+      <div class="comp-code">No auth tests generated</div>
+    </div>
+    <div class="comp-card good">
+      <div class="comp-label green">With Rules</div>
+      <div class="comp-code">Tests for missing JWT, invalid JWT, expired JWT</div>
+    </div>
+  </div>
+  <p style="margin-top: 16px; font-size: 20px; color: #94a3b8;">
+    Rules don't just improve style &mdash; they ensure the AI understands <span class="highlight">architecture</span> and <span class="highlight">security</span>.
+  </p>
+</div>
+
+<!-- Slide 9: GitHub & Scrum -->
+<div class="slide" id="s9">
+  <h2>GitHub Scrum Workflow</h2>
+  <div class="two-col">
+    <div class="col">
+      <h4 style="color: #89b4fa;">Conventions</h4>
+      <div class="code-block" style="font-size: 15px; padding: 16px;">Branch:  <span class="func">feature/7-auth-flow</span>
+Commit:  <span class="string">feat(auth): implement JWT login #7</span>
+PR:      <span class="keyword">[#7] Implement JWT login</span></div>
+      <ul>
+        <li>2 sprints, issue-scoped PRs</li>
+        <li>Every commit references a GitHub issue</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4 style="color: #89b4fa;">Division of Labor</h4>
+      <ul>
+        <li><span class="highlight">Zhiping</span> &mdash; Frontend, CodeMirror, Vercel Serverless, per-line Claude detection</li>
+        <li><span class="highlight">Qiushi</span> &mdash; Express backend, JWT + bcrypt auth, Supabase, batch scan service</li>
+        <li><span class="dim">Joint</span> &mdash; Testing, integration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Wrap-up -->
+<div class="slide" id="s10">
+  <h2>Summary & Next Steps</h2>
+  <div class="two-col">
+    <div class="col">
+      <h4 style="color: #4ade80;">What We Built</h4>
+      <ul>
+        <li>Full-stack AI-powered code editor</li>
+        <li>Real-time Claude instruction detection</li>
+        <li>3 code generation actions (inline)</li>
+        <li>Mock-first parallel development</li>
+        <li>Comprehensive .cursorrules for AI quality</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4 style="color: #fbbf24;">Next Steps</h4>
+      <ul>
+        <li>Deploy: Vercel (frontend) + Supabase (backend)</li>
+        <li>Connect frontend to real backend APIs</li>
+        <li>E2E testing with Playwright</li>
+        <li>Improve Claude prompts for better generation</li>
+        <li>More instruction types & actions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="center-content" style="margin-top: 40px;">
+    <p style="font-size: 24px; color: #94a3b8;">Thank you! Code available on <span class="highlight">GitHub</span></p>
+    <p class="dim" style="font-size: 16px; margin-top: 8px;">github.com/AnyaLeung/CS7180-project2</p>
+  </div>
+</div>
+
+<div class="slide-number" id="slideNum">1 / 10</div>
+<div class="nav-hint">← → Arrow keys to navigate</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, slides.length - 1));
+    slides[current].classList.add('active');
+    document.getElementById('slideNum').textContent = `${current + 1} / ${slides.length}`;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') showSlide(current + 1);
+    if (e.key === 'ArrowLeft') showSlide(current - 1);
+    if (e.key === 'Home') showSlide(0);
+    if (e.key === 'End') showSlide(slides.length - 1);
+  });
+</script>
+</body>
+</html>

@@ -190,7 +190,7 @@ const server = http.createServer(async (req, res) => {
   res.end(JSON.stringify({ error: 'Not found' }));
 });
 
-const PORT = 3001;
+const PORT = 3002;
 server.listen(PORT, () => {
   console.log(`\n  API dev server running at http://localhost:${PORT}`);
   console.log(`  Routes: /api/auth/*, /api/files/* (mock) | /api/scan-line, /api/generate (Claude)`);

@@ -104,7 +104,7 @@ describe('fileService', () => {
   });
 
   describe('listByUserId', () => {
-    it('returns empty array when no files', async () => {
+    it('returns only example files when no user files in DB', async () => {
       const mockEq = vi.fn().mockReturnValue({
         order: vi.fn().mockResolvedValue({ data: [], error: null }),
       });
@@ -113,11 +113,13 @@ describe('fileService', () => {
 
       const result = await listByUserId('user-1');
 
-      expect(result).toEqual([]);
+      expect(result).toHaveLength(2);
+      expect(result[0]).toMatchObject({ id: 'example-1', filename: 'analysis_plan.py' });
+      expect(result[1]).toMatchObject({ id: 'example-2', filename: 'data_cleaning.py' });
       expect(mockEq).toHaveBeenCalledWith('user_id', 'user-1');
     });
 
-    it('returns camelCase array when files exist', async () => {
+    it('returns example files followed by user files in camelCase', async () => {
       const rows = [
         {
           id: 'f1',
@@ -135,8 +137,10 @@ describe('fileService', () => {
 
       const result = await listByUserId('user-1');
 
-      expect(result).toHaveLength(1);
-      expect(result[0]).toEqual({
+      expect(result).toHaveLength(3);
+      expect(result[0]).toMatchObject({ id: 'example-1' });
+      expect(result[1]).toMatchObject({ id: 'example-2' });
+      expect(result[2]).toEqual({
         id: 'f1',
         filename: 'a.py',
         storagePath: 'user-1/f1.py',

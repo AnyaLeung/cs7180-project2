@@ -11,6 +11,7 @@ const BUTTONS: { action: InstructionAction; label: string; icon: string }[] = [
   { action: 'alternative-plan', label: 'Alternative', icon: '🔄' },
 ];
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function createInstructionButtonsElement(
   onAction: (action: InstructionAction) => void,
   loading: boolean
