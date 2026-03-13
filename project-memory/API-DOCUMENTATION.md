@@ -1,4 +1,6 @@
-# InstructScan API Documentation (Current Implementation)
+# InstructScan API Documentation
+
+This document is aligned with `project-memory/PRD1_1.md` (v1.1 scope) and the current sprint/issue board (`#2`-`#12`, `#15`-`#17`).
 
 This document describes the API surface that is implemented today across:
 
@@ -21,6 +23,7 @@ When using Vite proxy in local frontend dev:
 
 - Backend API base: your deployed backend URL (Render)
 - Frontend AI endpoints (`/api/scan-line`, `/api/generate`) are served from frontend deployment (Vercel serverless) if enabled
+- If you are not enabling frontend serverless AI in production, these two endpoints should be considered unavailable.
 
 ## 2) Auth and Request Conventions
 
@@ -163,6 +166,7 @@ Both endpoints are supported and perform the same upload behavior.
 
 Notes:
 - API injects two built-in example files (`example-1`, `example-2`) for every authenticated user.
+- These example files are product defaults from service logic and are not persisted in database tables.
 
 #### GET `/api/files/:id/content`
 
@@ -327,3 +331,4 @@ These endpoints are implemented in `frontend/api` and used by editor interaction
 - Field naming has been normalized to `filename` (not `fileName`) for file objects.
 - Backend and frontend AI endpoints use different error-key conventions (`message` vs `error`), so clients should handle both.
 - If desired, future cleanup can standardize error schema across all APIs.
+- This document describes runtime behavior; sprint/milestone planning details live in Github repo.

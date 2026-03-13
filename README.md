@@ -43,19 +43,25 @@ CS7180-project2/
 
 ### Sprint Breakdown
 
-- **Sprint 1**: issues `#01` to `#06`
+- **Sprint 1**: issues `#2` to `#6`
   - DB schema and migrations
   - Auth APIs and JWT middleware
   - File upload/list/delete baseline
   - Initial scan pipeline
-- **Sprint 2**: issues `#07` to `#11`
-  - Frontend/backend integration hardening
-  - Scan UX improvements and history/download flow
-  - Deployment and end-to-end stabilization
+- **Sprint 2**: issues `#7` to `#12`
+  - IDE integration + instruction highlighting and hover interactions
+  - Multi-action instruction assistance (`generate`, `detail`, `alternative`)
+  - Authenticated file management dashboard (default examples + cloud upload + delete)
+  - Reflection and before/after testing write-up
 - **Sprint 3 (Documentation & Delivery)**: issues `#15` to `#17`
   - Technical blog post deliverable (1500 words)
   - 10-minute demo video deliverable
   - Finalized README and API documentation
+
+### Current Issue Status (from project board)
+
+- **Open**: `#16` (demo video), `#17` (README + API documentation finalization)
+- **Closed**: `#2` to `#12`, `#15`
 
 ### Branch and Commit Conventions
 

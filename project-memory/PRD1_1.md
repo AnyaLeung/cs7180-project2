@@ -172,16 +172,24 @@ The team delivered through iterative sprints and introduced implementation-infor
 
 ## 11. Sprint Mapping
 
-### Sprint 1 (`#01` to `#06`)
+### Sprint 1 (`#2` to `#6`)
 
-- Schema, auth, baseline file APIs, initial scanning pipeline
+- Schema, auth, secure upload/storage, and baseline file APIs
 
-### Sprint 2 (`#07` to `#11`)
+### Sprint 2 (`#7` to `#12`)
 
-- Frontend-backend integration, scan UX enhancements, deployment stabilization
+- IDE integration + instruction highlighting and hover interactions
+- Multi-action instruction assistance (`generate`, `detail`, `alternative`)
+- Authenticated file management dashboard (default examples + cloud upload + delete)
+- Before/after testing and reflection write-up
 
 ### Sprint 3: Documentation & Delivery (`#15` to `#17`)
 
 - Technical blog post
 - Demo video
 - Final README/API docs consolidation
+
+### Current Status Snapshot
+
+- Open issues: `#16`, `#17`
+- Closed issues: `#2` to `#12`, `#15`
