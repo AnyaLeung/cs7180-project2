@@ -41,8 +41,8 @@ This document captures the full Agile/Scrum process for InstructScan across thre
 
 **Acceptance Criteria**:
 - [x] Create `users` table (managed by Supabase Auth)
-- [x] Create `files` table with fields: `id`, `user_id`, `filename`, `storage_path`, `size`
-- [x] Create `scans` table with fields: `id`, `file_id`, `result_path`, `scanned_at`
+- [x] Create `files` table with fields: `id`, `user_id`, `filename`, `storage_path`, `size_bytes`, `uploaded_at`
+- [x] Create `scans` table with fields: `id`, `file_id`, `result_path`, `scanned_at`, `instruction_count`, `expires_at`
 - [x] Enable Row Level Security (RLS) so users can only access their own data
 
 ### US-S1-02: User Registration and Login (`#3`)
@@ -327,3 +327,5 @@ This document captures the full Agile/Scrum process for InstructScan across thre
 | 1 | Core Infrastructure & LLM Scanning Engine | 02-26 to 03-04 | #2 - #6 (5 issues) | All closed |
 | 2 | Interactive Code Editor & Persistence | 03-04 to 03-10 | #7 - #12 (6 issues) | All closed |
 | 3 | Documentation & Delivery | 03-10 to 03-13 | #15 - #17 (3 issues) | All closed |
+
+**Total issues**: 14 closed, 0 open

@@ -331,4 +331,4 @@ These endpoints are implemented in `frontend/api` and used by editor interaction
 - Field naming has been normalized to `filename` (not `fileName`) for file objects.
 - Backend and frontend AI endpoints use different error-key conventions (`message` vs `error`), so clients should handle both.
 - If desired, future cleanup can standardize error schema across all APIs.
-- This document describes runtime behavior; sprint/milestone planning details live in Github repo.
+- This document describes runtime behavior; sprint/milestone planning details live in [AGILE-PROCESS.md](AGILE-PROCESS.md) and [PRD v1.1](PRD1_1.md).

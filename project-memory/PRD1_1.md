@@ -191,5 +191,5 @@ The team delivered through iterative sprints and introduced implementation-infor
 
 ### Current Status Snapshot
 
-- Open issues: `#16`, `#17`
-- Closed issues: `#2` to `#12`, `#15`
+- Open issues: none
+- Closed issues: `#2` to `#12`, `#15` to `#17`
