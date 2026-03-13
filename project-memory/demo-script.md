@@ -144,7 +144,7 @@ Browser (React + CodeMirror 6)
 
 ### [Slide 8 — GitHub Scrum Workflow] (8:30 - 9:00)
 
-> "We organized our work using GitHub Issues with two sprints. Sprint 1 covered project setup, database schema, auth, and file upload. Sprint 2 covered the LLM scanner, frontend editor, and deployment."
+> "We organized our work using GitHub Issues across three sprints. Sprint 1 covered project setup, database schema, auth, and file upload. Sprint 2 covered the editor integration, hover actions, multi-action AI assistance, and the authenticated file dashboard. Sprint 3 focused on documentation and delivery — the blog post, this demo video, and finalizing README and API docs."
 >
 > "Every branch follows the naming convention — feature/7-auth-flow. Every commit references an issue — feat(auth): implement JWT login #7. Every PR links to the issue it resolves."
 >
@@ -160,11 +160,11 @@ Browser (React + CodeMirror 6)
 >
 > "Our mock-first architecture let us develop the frontend independently — mock API handled auth and files, while real Claude calls powered the instruction detection. When the backend was ready, we connected them."
 
-### [Slide 10 — Challenges & Next Steps] (9:30 - 10:00)
+### [Slide 10 — Challenges & What's Next] (9:30 - 10:00)
 
-> "Some challenges: CodeMirror's hover API didn't work reliably for async operations, so we switched to cursor-based detection — clicking a line instead of hovering. We also learned that the specificity of your rules file directly correlates with AI code quality — vague rules produce vague code."
+> "Some challenges: CodeMirror's hover API didn't work reliably for async operations, so we switched to cursor-based detection — clicking a line instead of hovering. The mock API silently intercepting all requests was a tricky debugging session — we had to gate it behind an env flag. We also learned that the specificity of your rules file directly correlates with AI code quality — vague rules produce vague code."
 >
-> "For next steps: deploy to Vercel and Supabase, connect the frontend to the real backend to replace the mock API, add end-to-end testing with Playwright, and improve Claude prompts for even better code generation."
+> "The app is now deployed — frontend on Vercel, backend on Render, data on Supabase — and the frontend is connected to the real backend. For future work: improved Claude prompts for even better code generation, and more instruction types and actions."
 >
 > "Thank you for watching. The code is on GitHub, and we're happy to take any questions."
 
@@ -178,4 +178,4 @@ Browser (React + CodeMirror 6)
 - **Fallback**: If Claude is slow, do multiple takes and pick the best one
 - **Screen**: Record at 1920x1080, use Chrome in a clean window (no bookmarks bar, no extensions)
 - **Slides**: Use a dark theme to match the app aesthetic
-- **Backend demo**: If real Supabase is connected by recording time, use real login/upload instead of mock
+- **Backend demo**: Use the deployed backend (Render) with real login/upload — mock API should be disabled

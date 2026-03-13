@@ -60,8 +60,8 @@ CS7180-project2/
 
 ### Current Issue Status (from project board)
 
-- **Open**: `#16` (demo video), `#17` (README + API documentation finalization)
-- **Closed**: `#2` to `#12`, `#15`
+- **Open**: none
+- **Closed**: `#2` to `#12`, `#15` to `#17`
 
 ### Branch and Commit Conventions
 
